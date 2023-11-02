@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpaceGlance</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '/styles/style.css'%}">
+</head>
+
+<body>
+    <div class="pagina-inicial">
+        <header class="cabecalho">
+            <img src="{% static '/assets/logo/Logo.png' %}" alt="Logo da SpaceGlance" />
+            <div class="cabecalho__busca">
+                <div class="busca__fundo">
+                    <form action="{% url 'buscar' %}">
+                        <input class="busca__input" style="color: white" name='buscar' type="text" placeholder="O que você procura?">
+                        <button type="submit" style="background-color: transparent; border: none;">
+                            <img class="busca__icone" src="{% static '/assets/ícones/1x/search.png' %}" alt="ícone de search">
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </header>
+        <main class="principal">
+            <section class="menu-lateral">
+                <nav class="menu-lateral__navegacao">
+                    <a href="{% url 'home' %}"><img src="{% static '/assets/ícones/1x/Home - ativo.png'%}"> Home</a>
+                    <a href="#"><img src="{% static '/assets/ícones/1x/Mais vistas - inativo.png'%}"> Mais vistas</a>
+                    <a href="#"><img src="{% static '/assets/ícones/1x/Novas - inativo.png'%}"> Novas</a>
+                    <a href="#"><img src="{% static '/assets/ícones/1x/Surpreenda-me - inativo.png'%}"> Surpreenda-me</a>
+                </nav>
+            </section>
+            {% block body %}
+            {% endblock %}
+        </main>
+    </div>        
+    {% include 'galeria/partials/_footer.html' %}
+</body>
+
+</html>
