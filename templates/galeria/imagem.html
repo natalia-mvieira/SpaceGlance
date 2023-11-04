@@ -1,5 +1,6 @@
-{% extends 'galeria/base.html' %}
+{% extends 'shared/base.html' %}
 {% load static %}
+
 {% block body %}
             <section class="conteudo">
                 <section class="imagem">
@@ -15,6 +16,12 @@
                                 <p class="imagem__descricao">{{ fotografia.legenda }}</p>
                                 <p class="imagem__texto">{{ fotografia.descricao }}</p>
                             </div>
+                            <div>
+                                {% if user.is_authenticated %}
+                                <a href="{% url 'editar_imagem' %}"><button class="btn btn-success col-12" style="padding: top 5px;">Editar Imagem</button></a>
+                                <a href="{% url 'deletar_imagem' %}"><button class="btn btn-danger col-12" style="padding: top 5px;">Deletar</button></a>
+                                {% endif %}
+                            </div>    
                         </div>
                     </div>
                 </section>

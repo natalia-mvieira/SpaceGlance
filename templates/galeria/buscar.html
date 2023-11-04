@@ -1,8 +1,6 @@
-{% extends 'galeria/base.html' %}
+{% extends 'shared/base.html' %}
 {% load static %}
 {% block body %}
-            <section class="conteudo">
-                {% include 'galeria/partials/_top.html' %}
                 <section class="galeria">
                     <div class="cards">
                         <h2 class="cards__titulo">Imagens encontradas:</h2>
@@ -37,5 +35,4 @@
                         </ul>
                 </section>
                 </div>
-            </section>
 {% endblock %}
