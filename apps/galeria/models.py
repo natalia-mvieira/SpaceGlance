@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 
 class Fotografia(models.Model):
 
-    CATEGORIAS = [('NEBULOSA', 'Nebulosa'), ('ESTRELA', 'Estrela'), 
-                        ('GALÁXIA', 'Galáxia'), ('PLANETA', 'Planeta')]
+    CATEGORIAS = [('NEBULOSA', 'Nebulosa'), ('ESTRELA','Estrela'), 
+                        ('GALÁXIA','Galáxia'), ('PLANETA','Planeta')]
     
     nome = models.CharField(max_length=100, null=False, blank=False)
     legenda = models.CharField(max_length=150, null=False, blank=False)
