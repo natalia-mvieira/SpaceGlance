@@ -4,7 +4,7 @@ from apps.galeria.forms import FotografiaForms
 from django.contrib import messages
 
 def index(request):   
-    fotografias = Fotografia.objects.order_by('data_fotografia').filter(publicada=True)
+    fotografias = Fotografia.objects.order_by('-data_fotografia').filter(publicada=True) # o '-' em data_fotografia inverte a ordem
     return render(request, 'galeria/index.html', {'cards': fotografias})
 
 def imagem(request, foto_id):
@@ -12,7 +12,7 @@ def imagem(request, foto_id):
     return render(request, 'galeria/imagem.html', {"fotografia": fotografia})
 
 def buscar(request):    
-    fotografias = Fotografia.objects.order_by('data_fotografia').filter(publicada=True)
+    fotografias = Fotografia.objects.order_by('-data_fotografia').filter(publicada=True)
 
     if 'buscar' in request.GET:
         nome_a_buscar = request.GET['buscar']
@@ -26,12 +26,13 @@ def nova_imagem(request):
         messages.error(request, 'Por favor, realize o login.')
         return redirect('login')
     
-    form = FotografiaForms()
+    fotografia = Fotografia()
+    fotografia.usuario = request.user
+    form = FotografiaForms(instance=fotografia)
     if request.method == 'POST':
-        form = FotografiaForms(request.POST, request.FILES)
+        form = FotografiaForms(request.POST, request.FILES, instance=fotografia)
         if form.is_valid:
             form.save()
-            form.user = request.user
             messages.success(request, 'Imagem publicada com sucesso!')
             return redirect('home')
         else: 
@@ -45,6 +46,7 @@ def editar_imagem(request, foto_id):
         return redirect('login')
     
     fotografia = Fotografia.objects.get(id=foto_id)
+    fotografia.usuario = request.user
     form = FotografiaForms(instance=fotografia)
     
     if request.method == 'POST':
@@ -67,16 +69,8 @@ def deletar_imagem(request, foto_id):
     return redirect('home')
         
 
-# def tag(request,categoria):
-#     fotografias = Fotografia.objects.order_by('data_fotografia').filter(publicada=True)
-#     if categoria=='nebulosa':
-#         fotografias = fotografias.filter(categoria='Nebulosa')
-#     elif categoria=='planeta':    
-#         fotografias = fotografias.filter(categoria='Planeta')
-#     elif categoria=='estrela':
-#         fotografias = fotografias.filter(categoria='Estrela')
-#     elif categoria=='galaxia':    
-#         fotografias = fotografias.filter(categoria='Galáxia')
-#     return render(request, 'galeria/busca_tags.html', {'cards': fotografias})
+def tag(request,foto_tag):
+    fotografias = Fotografia.objects.order_by('-data_fotografia').filter(publicada=True, categoria=foto_tag)
+    return render(request, 'galeria/buscar.html', {'cards': fotografias})
 
 

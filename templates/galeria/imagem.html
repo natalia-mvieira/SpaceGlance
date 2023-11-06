@@ -18,8 +18,12 @@
                             </div>
                             <div>
                                 {% if user.is_authenticated %}
-                                <a href="{% url 'editar_imagem' fotografia.id %}"><button class="btn btn-success col-12" style="padding: top 5px;">Editar Imagem</button></a>
+                                <div style='margin-bottom: 5px'>
+                                <a href="{% url 'editar_imagem' fotografia.id %}"><button class="btn btn-success col-12" style="padding: top 5px;">Editar</button></a>
+                                </div>
+                                <div>
                                 <a href="{% url 'deletar_imagem' fotografia.id %}"><button class="btn btn-danger col-12" style="padding: top 5px;">Deletar</button></a>
+                                </div>
                                 {% endif %}
                             </div>    
                         </div>

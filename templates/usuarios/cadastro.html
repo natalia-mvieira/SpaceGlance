@@ -2,10 +2,6 @@
 {% load static %}
 
 
-{% block menu %}
-    <a href="{% url 'home' %}"><img src="{% static '/assets/ícones/1x/Home - ativo.png'%}"> Home</a>
-{% endblock %}
-
 {% block body %}
             <section class="galeria" style="margin-left: 5em">
                 <form action="{% url 'cadastro' %}" method="POST">
